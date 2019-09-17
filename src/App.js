@@ -38,7 +38,7 @@ function App() {
           <li key={row}>{row}</li>
         ))}
 
-        {!loading && (
+        {!loading && more && (
           <li>
             <button
               onClick={() => {
