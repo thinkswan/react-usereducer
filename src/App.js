@@ -1,12 +1,9 @@
 import React from "react"
 
-const allData = new Array(25).fill(0).map((_val, i) => i + 1)
-const perPage = 10
-
 const reducer = (state, action) => {
   switch (action.type) {
     case "start":
-      break
+      return { ...state, loading: true }
     case "loaded":
       break
     default:
@@ -21,13 +18,24 @@ function App() {
     data: [],
     after: 0
   })
+  const { loading, data } = state
 
   return (
     <div>
       <ul>
+        {loading && <li>Loading...</li>}
+
         {data.map(row => (
           <li key={row}>{row}</li>
         ))}
+
+        {!loading && (
+          <li>
+            <button onClick={() => dispatch({ type: "start" })}>
+              Load more
+            </button>
+          </li>
+        )}
       </ul>
     </div>
   )
