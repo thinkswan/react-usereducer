@@ -1,5 +1,6 @@
 import React from "react"
 
+// Create an array of numbers
 const allData = new Array(25).fill(0).map((_val, i) => i + 1)
 const perPage = 10
 
@@ -29,6 +30,14 @@ function App() {
   })
   const { loading, more, data, after } = state
 
+  const loadMore = () => {
+    dispatch({ type: "start" })
+
+    const newData = allData.slice(after, after + perPage)
+
+    dispatch({ type: "loaded", newData })
+  }
+
   return (
     <div>
       <ul>
@@ -40,17 +49,7 @@ function App() {
 
         {!loading && more && (
           <li>
-            <button
-              onClick={() => {
-                dispatch({ type: "start" })
-
-                const newData = allData.slice(after, after + perPage)
-
-                dispatch({ type: "loaded", newData })
-              }}
-            >
-              Load more
-            </button>
+            <button onClick={loadMore}>Load more</button>
           </li>
         )}
       </ul>
