@@ -3,12 +3,16 @@ import React from "react"
 // Create an array of numbers
 const allData = new Array(25).fill(0).map((_val, i) => i + 1)
 const perPage = 10
+const types = {
+  start: "START",
+  loaded: "LOADED"
+}
 
 const reducer = (state, action) => {
   switch (action.type) {
-    case "start":
+    case types.start:
       return { ...state, loading: true }
-    case "loaded":
+    case types.loaded:
       return {
         ...state,
         loading: false,
@@ -31,11 +35,11 @@ function App() {
   const { loading, more, data, after } = state
 
   const loadMore = () => {
-    dispatch({ type: "start" })
+    dispatch({ type: types.start })
 
     const newData = allData.slice(after, after + perPage)
 
-    dispatch({ type: "loaded", newData })
+    dispatch({ type: types.loaded, newData })
   }
 
   return (
