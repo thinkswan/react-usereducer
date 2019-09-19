@@ -55,11 +55,11 @@ function App() {
   return (
     <div>
       <ul>
-        {loading && <li>Loading...</li>}
-
         {data.map(row => (
           <li key={row}>{row}</li>
         ))}
+
+        {loading && <li>Loading...</li>}
 
         {!loading && more && <LoadMore loadMore={loadMore} />}
       </ul>
