@@ -45,9 +45,11 @@ function App() {
   const loadMore = () => {
     dispatch({ type: types.start })
 
-    const newData = allData.slice(after, after + perPage)
+    setTimeout(() => {
+      const newData = allData.slice(after, after + perPage)
 
-    dispatch({ type: types.loaded, newData })
+      dispatch({ type: types.loaded, newData })
+    }, 500)
   }
 
   return (
