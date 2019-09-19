@@ -25,6 +25,14 @@ const reducer = (state, action) => {
   }
 }
 
+function LoadMore({ loadMore }) {
+  return (
+    <li>
+      <button onClick={loadMore}>Load more</button>
+    </li>
+  )
+}
+
 function App() {
   const [state, dispatch] = React.useReducer(reducer, {
     loading: false,
@@ -51,11 +59,7 @@ function App() {
           <li key={row}>{row}</li>
         ))}
 
-        {!loading && more && (
-          <li>
-            <button onClick={loadMore}>Load more</button>
-          </li>
-        )}
+        {!loading && more && <LoadMore loadMore={loadMore} />}
       </ul>
     </div>
   )
