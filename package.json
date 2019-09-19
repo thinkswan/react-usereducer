@@ -1,7 +1,7 @@
 {
   "name": "react-usereducer",
   "version": "0.1.0",
-  "description": "A React app that manages data with a built-in reducer.",
+  "description": "A React app that manages data using the reducer and context APIs.",
   "private": true,
   "dependencies": {
     "react": "^16.9.0",
