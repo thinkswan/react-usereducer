@@ -25,15 +25,9 @@ const reducer = (state, action) => {
   }
 }
 
-function LoadMore({ loadMore }) {
-  return (
-    <li>
-      <button onClick={loadMore}>Load more</button>
-    </li>
-  )
-}
+const MyContext = React.createContext()
 
-function App() {
+function MyProvider({ children }) {
   const [state, dispatch] = React.useReducer(reducer, {
     loading: false,
     more: true,
@@ -53,6 +47,26 @@ function App() {
   }
 
   return (
+    <MyContext.Provider value={{ loading, data, more, loadMore }}>
+      {children}
+    </MyContext.Provider>
+  )
+}
+
+function LoadMore() {
+  const { loadMore } = React.useContext(MyContext)
+
+  return (
+    <li>
+      <button onClick={loadMore}>Load more</button>
+    </li>
+  )
+}
+
+function App() {
+  const { loading, data, more } = React.useContext(MyContext)
+
+  return (
     <div>
       <ul>
         {data.map(row => (
@@ -61,10 +75,14 @@ function App() {
 
         {loading && <li>Loading...</li>}
 
-        {!loading && more && <LoadMore loadMore={loadMore} />}
+        {!loading && more && <LoadMore />}
       </ul>
     </div>
   )
 }
 
-export default App
+export default () => (
+  <MyProvider>
+    <App />
+  </MyProvider>
+)
